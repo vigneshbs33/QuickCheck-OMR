@@ -1,0 +1,1604 @@
+[
+  {
+    "image": "sample_data/test_image.jpeg",
+    "result": {
+      "student_id": null,
+      "total_score": 13,
+      "percentage": 13.0,
+      "grade": "D",
+      "subjects": {
+        "Python": {
+          "score": 4,
+          "out_of": 20
+        },
+        "Data Analysis": {
+          "score": 2,
+          "out_of": 20
+        },
+        "MySQL": {
+          "score": 4,
+          "out_of": 20
+        },
+        "Power BI": {
+          "score": 2,
+          "out_of": 20
+        },
+        "Adv Stats": {
+          "score": 1,
+          "out_of": 20
+        }
+      },
+      "per_question": {
+        "1": {
+          "detected": "A",
+          "valid": true,
+          "correct": true
+        },
+        "2": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "3": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "4": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "5": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "6": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "7": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "8": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "9": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "10": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "11": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "12": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "13": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "14": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "15": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "16": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "17": {
+          "detected": "C",
+          "valid": true,
+          "correct": true
+        },
+        "18": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "19": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "20": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "21": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "22": {
+          "detected": "A",
+          "valid": true,
+          "correct": false
+        },
+        "23": {
+          "detected": "A",
+          "valid": true,
+          "correct": false
+        },
+        "24": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "25": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "26": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "27": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "28": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "29": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "30": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "31": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "32": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "33": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "34": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "35": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "36": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "37": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "38": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "39": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "40": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "41": {
+          "detected": "A",
+          "valid": true,
+          "correct": false
+        },
+        "42": {
+          "detected": "A",
+          "valid": true,
+          "correct": false
+        },
+        "43": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "44": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "45": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "46": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "47": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "48": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "49": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "50": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "51": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "52": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "53": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "54": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "55": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "56": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "57": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "58": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "59": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "60": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "61": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "62": {
+          "detected": "A",
+          "valid": true,
+          "correct": false
+        },
+        "63": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "64": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "65": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "66": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "67": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "68": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "69": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "70": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "71": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "72": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "73": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "74": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "75": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "76": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "77": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "78": {
+          "detected": "A",
+          "valid": true,
+          "correct": false
+        },
+        "79": {
+          "detected": "A",
+          "valid": true,
+          "correct": false
+        },
+        "80": {
+          "detected": "A",
+          "valid": true,
+          "correct": true
+        },
+        "81": {
+          "detected": "A",
+          "valid": true,
+          "correct": false
+        },
+        "82": {
+          "detected": "A",
+          "valid": true,
+          "correct": false
+        },
+        "83": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "84": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "85": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "86": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "87": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "88": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "89": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "90": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "91": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "92": {
+          "detected": "A",
+          "valid": true,
+          "correct": false
+        },
+        "93": {
+          "detected": "A",
+          "valid": true,
+          "correct": false
+        },
+        "94": {
+          "detected": "A",
+          "valid": true,
+          "correct": true
+        },
+        "95": {
+          "detected": "A",
+          "valid": true,
+          "correct": false
+        },
+        "96": {
+          "detected": "A",
+          "valid": true,
+          "correct": false
+        },
+        "97": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "98": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "99": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "100": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        }
+      },
+      "annotated_image": "[[[0 0 0]\n  [0 0 0]\n  [0 0 0]\n  ...\n  [0 0 0]\n  [0 0 0]\n  [0 0 0]]\n\n [[0 0 0]\n  [0 0 0]\n  [0 0 0]\n  ...\n  [0 0 0]\n  [0 0 0]\n  [0 0 0]]\n\n [[0 0 0]\n  [0 0 0]\n  [0 0 0]\n  ...\n  [0 0 0]\n  [0 0 0]\n  [0 0 0]]\n\n ...\n\n [[0 0 0]\n  [0 0 0]\n  [0 0 0]\n  ...\n  [0 0 0]\n  [0 0 0]\n  [0 0 0]]\n\n [[0 0 0]\n  [0 0 0]\n  [0 0 0]\n  ...\n  [0 0 0]\n  [0 0 0]\n  [0 0 0]]\n\n [[0 0 0]\n  [0 0 0]\n  [0 0 0]\n  ...\n  [0 0 0]\n  [0 0 0]\n  [0 0 0]]]"
+    }
+  },
+  {
+    "image": "sample_data/test_image2.jpeg",
+    "result": {
+      "student_id": null,
+      "total_score": 10,
+      "percentage": 10.0,
+      "grade": "D",
+      "subjects": {
+        "Python": {
+          "score": 0,
+          "out_of": 20
+        },
+        "Data Analysis": {
+          "score": 3,
+          "out_of": 20
+        },
+        "MySQL": {
+          "score": 2,
+          "out_of": 20
+        },
+        "Power BI": {
+          "score": 3,
+          "out_of": 20
+        },
+        "Adv Stats": {
+          "score": 2,
+          "out_of": 20
+        }
+      },
+      "per_question": {
+        "1": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "2": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "3": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "4": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "5": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "6": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "7": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "8": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "9": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "10": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "11": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "12": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "13": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "14": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "15": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "16": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "17": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "18": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "19": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "20": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "21": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "22": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "23": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "24": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "25": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "26": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "27": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "28": {
+          "detected": "B",
+          "valid": true,
+          "correct": true
+        },
+        "29": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "30": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "31": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "32": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "33": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "34": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "35": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "36": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "37": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "38": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "39": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "40": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "41": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "42": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "43": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "44": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "45": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "46": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "47": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "48": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "49": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "50": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "51": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "52": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "53": {
+          "detected": "C",
+          "valid": true,
+          "correct": true
+        },
+        "54": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "55": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "56": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "57": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "58": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "59": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "60": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "61": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "62": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "63": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "64": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "65": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "66": {
+          "detected": "C",
+          "valid": true,
+          "correct": true
+        },
+        "67": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "68": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "69": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "70": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "71": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "72": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "73": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "74": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "75": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "76": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "77": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "78": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "79": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "80": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "81": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "82": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "83": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "84": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "85": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "86": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "87": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "88": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "89": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "90": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "91": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "92": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "93": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "94": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "95": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "96": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "97": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "98": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "99": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "100": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        }
+      },
+      "annotated_image": "[[[ 48  64  80]\n  [ 52  68  84]\n  [ 52  70  87]\n  ...\n  [112 154 191]\n  [111 153 190]\n  [110 152 189]]\n\n [[ 50  66  82]\n  [ 55  71  87]\n  [ 56  74  91]\n  ...\n  [107 149 186]\n  [105 147 184]\n  [103 145 182]]\n\n [[ 49  68  83]\n  [ 54  73  88]\n  [ 59  78  93]\n  ...\n  [103 145 182]\n  [101 143 180]\n  [ 99 141 178]]\n\n ...\n\n [[139 165 181]\n  [139 165 181]\n  [139 165 181]\n  ...\n  [ 11  21  21]\n  [ 11  20  23]\n  [ 11  21  21]]\n\n [[140 166 182]\n  [140 166 182]\n  [141 167 183]\n  ...\n  [  9  21  23]\n  [  9  20  24]\n  [  9  21  23]]\n\n [[140 166 182]\n  [140 166 182]\n  [141 167 183]\n  ...\n  [  9  20  24]\n  [  9  20  24]\n  [  9  20  24]]]"
+    }
+  },
+  {
+    "image": "sample_data/test_image3.jpeg",
+    "result": {
+      "student_id": null,
+      "total_score": 10,
+      "percentage": 10.0,
+      "grade": "D",
+      "subjects": {
+        "Python": {
+          "score": 3,
+          "out_of": 20
+        },
+        "Data Analysis": {
+          "score": 4,
+          "out_of": 20
+        },
+        "MySQL": {
+          "score": 3,
+          "out_of": 20
+        },
+        "Power BI": {
+          "score": 0,
+          "out_of": 20
+        },
+        "Adv Stats": {
+          "score": 0,
+          "out_of": 20
+        }
+      },
+      "per_question": {
+        "1": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "2": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "3": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "4": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "5": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "6": {
+          "detected": "A",
+          "valid": true,
+          "correct": true
+        },
+        "7": {
+          "detected": "A",
+          "valid": true,
+          "correct": false
+        },
+        "8": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "9": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "10": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "11": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "12": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "13": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "14": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "15": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "16": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "17": {
+          "detected": "C",
+          "valid": true,
+          "correct": true
+        },
+        "18": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "19": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "20": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "21": {
+          "detected": "A",
+          "valid": true,
+          "correct": false
+        },
+        "22": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "23": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "24": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "25": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "26": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "27": {
+          "detected": "B",
+          "valid": true,
+          "correct": false
+        },
+        "28": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "29": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "30": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "31": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "32": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "33": {
+          "detected": "C",
+          "valid": true,
+          "correct": true
+        },
+        "34": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "35": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "36": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "37": {
+          "detected": "B",
+          "valid": true,
+          "correct": false
+        },
+        "38": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "39": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "40": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "41": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "42": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "43": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "44": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "45": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "46": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "47": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "48": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "49": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "50": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "51": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "52": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "53": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "54": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "55": {
+          "detected": "D",
+          "valid": true,
+          "correct": true
+        },
+        "56": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "57": {
+          "detected": "C",
+          "valid": true,
+          "correct": true
+        },
+        "58": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "59": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "60": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "61": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "62": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "63": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "64": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "65": {
+          "detected": "C",
+          "valid": true,
+          "correct": false
+        },
+        "66": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "67": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "68": {
+          "detected": "D",
+          "valid": true,
+          "correct": false
+        },
+        "69": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "70": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "71": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "72": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "73": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "74": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "75": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "76": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "77": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "78": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "79": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "80": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "81": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "82": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "83": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "84": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "85": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "86": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "87": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "88": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "89": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "90": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "91": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "92": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "93": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "94": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "95": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "96": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "97": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "98": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "99": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        },
+        "100": {
+          "detected": "None",
+          "valid": true,
+          "correct": false
+        }
+      },
+      "annotated_image": "[[[ 56  98 140]\n  [ 60 102 144]\n  [ 65 107 149]\n  ...\n  [ 65 104 143]\n  [ 57  93 131]\n  [ 57  93 131]]\n\n [[ 82 124 166]\n  [ 86 128 170]\n  [ 91 133 175]\n  ...\n  [ 63 102 141]\n  [ 59  95 133]\n  [ 59  95 133]]\n\n [[ 81 123 165]\n  [ 82 124 166]\n  [ 80 122 164]\n  ...\n  [ 54  93 132]\n  [ 57  93 131]\n  [ 57  93 131]]\n\n ...\n\n [[  8   9  13]\n  [ 10  11  15]\n  [ 10  11  15]\n  ...\n  [ 33  67 103]\n  [ 44  78 114]\n  [ 42  78 114]]\n\n [[ 11  12  16]\n  [ 12  13  17]\n  [ 12  13  17]\n  ...\n  [ 43  77 113]\n  [ 47  81 117]\n  [ 45  81 117]]\n\n [[ 11  12  16]\n  [ 12  13  17]\n  [ 12  13  17]\n  ...\n  [ 50  84 120]\n  [ 50  84 120]\n  [ 48  84 120]]]"
+    }
+  }
+]
