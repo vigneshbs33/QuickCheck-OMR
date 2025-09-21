@@ -5,6 +5,6 @@ Developed by InteliCat Team
 This implementation is provided to InteliCat for exclusive use under the project name QuickCheck.
 """
 
-from .engine import OMRProcessor
+from .refined_engine import RefinedOMRProcessor
 
-__all__ = ['OMRProcessor']
+__all__ = ['RefinedOMRProcessor']

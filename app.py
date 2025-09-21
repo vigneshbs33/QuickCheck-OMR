@@ -1,22 +1,23 @@
 """
-QuickCheck - OMR Evaluation App
+QuickCheck - Advanced OMR Evaluation System
 Developed by InteliCat Team
 
-This implementation is provided to InteliCat for exclusive use under the project name QuickCheck.
+A comprehensive, template-free OMR evaluation system optimized for accuracy and ease of use.
 """
 
 import streamlit as st
 import cv2
 import numpy as np
-import json
 import pandas as pd
+import json
 from PIL import Image
 import io
 import os
 from pathlib import Path
+from typing import Dict, List, Optional, Tuple
 
-# Import our OMR engine
-from omr.optimized_engine import OptimizedOMRProcessor
+# Import our refined OMR engine
+from omr.refined_engine import RefinedOMRProcessor
 
 # Page configuration
 st.set_page_config(
@@ -26,388 +27,375 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for branding
+# Custom CSS for modern UI
 st.markdown("""
-<style>
+    <style>
     .main-header {
-        text-align: center;
-        color: #1f77b4;
-        font-size: 2.5rem;
+        font-size: 4em;
         font-weight: bold;
-        margin-bottom: 0.5rem;
+        color: #2E8B57;
+        text-align: center;
+        margin-bottom: 0.2em;
+        text-shadow: 2px 2px 4px #aaaaaa;
+        background: linear-gradient(45deg, #2E8B57, #32CD32);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
     .sub-header {
+        font-size: 1.5em;
+        color: #555555;
         text-align: center;
-        color: #666;
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
+        margin-bottom: 1em;
     }
     .intelicat-brand {
-        color: #ff6b6b;
+        color: #FF6B35;
         font-weight: bold;
     }
-    .result-card {
-        background-color: #f0f2f6;
+    .metric-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         padding: 1rem;
-        border-radius: 0.5rem;
-        margin: 1rem 0;
-    }
-    .score-display {
-        font-size: 2rem;
-        font-weight: bold;
+        border-radius: 10px;
+        color: white;
         text-align: center;
-        margin: 1rem 0;
+        margin: 0.5rem 0;
     }
-    .grade-A { color: #28a745; }
-    .grade-B { color: #17a2b8; }
-    .grade-C { color: #ffc107; }
-    .grade-D { color: #dc3545; }
-</style>
-""", unsafe_allow_html=True)
+    .success-card {
+        background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+        padding: 1rem;
+        border-radius: 10px;
+        color: white;
+        text-align: center;
+        margin: 0.5rem 0;
+    }
+    .warning-card {
+        background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+        padding: 1rem;
+        border-radius: 10px;
+        color: white;
+        text-align: center;
+        margin: 0.5rem 0;
+    }
+    .stButton>button {
+        background: linear-gradient(45deg, #2E8B57, #32CD32);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 24px;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .stButton>button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    }
+    .sidebar .sidebar-content {
+        background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    .stSelectbox>div>div>select {
+        border-radius: 8px;
+    }
+    .stTextArea>div>div>textarea {
+        border-radius: 8px;
+    }
+    .stFileUploader>div>div>div>div {
+        border-radius: 8px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+def load_answer_key_from_json(uploaded_file) -> Optional[Dict[str, str]]:
+    """Load answer key from uploaded JSON file"""
+    try:
+        content = uploaded_file.read()
+        data = json.loads(content.decode('utf-8'))
+        
+        # Handle different JSON formats
+        if 'subjects' in data:
+            # Format: {"subjects": {"python": {"questions": {"1": "A", ...}}}}
+            answer_key = {}
+            for subject_data in data['subjects'].values():
+                if 'questions' in subject_data:
+                    answer_key.update(subject_data['questions'])
+            return answer_key
+        else:
+            # Format: {"1": "A", "2": "B", ...}
+            return data
+    except Exception as e:
+        st.error(f"Error loading JSON file: {str(e)}")
+        return None
+
+def parse_subject_ranges(subject_ranges_str: str) -> Dict[str, Dict[str, int]]:
+    """Parse subject ranges string into dictionary"""
+    subjects = {}
+    try:
+        for entry in subject_ranges_str.split(','):
+            if ':' in entry:
+                range_str, subject_name = entry.split(':', 1)
+                range_str = range_str.strip()
+                subject_name = subject_name.strip()
+                
+                if '-' in range_str:
+                    start, end = map(int, range_str.split('-'))
+                    subjects[subject_name] = {'start': start, 'end': end}
+                else:
+                    st.warning(f"Invalid range format: {range_str}. Skipping.")
+    except Exception as e:
+        st.error(f"Error parsing subject ranges: {str(e)}")
+    return subjects
+
+def create_sample_answer_key() -> str:
+    """Create a sample answer key for demonstration"""
+    sample_key = {}
+    for i in range(1, 101):
+        # Create a pattern: A, B, C, D, A, B, C, D...
+        options = ['A', 'B', 'C', 'D']
+        sample_key[str(i)] = options[(i - 1) % 4]
+    return json.dumps(sample_key, indent=2)
 
 def main():
+    """Main application function"""
     # Header
     st.markdown('<h1 class="main-header">QuickCheck</h1>', unsafe_allow_html=True)
-    st.markdown('<p class="sub-header">OMR Evaluation System by <span class="intelicat-brand">InteliCat</span></p>', unsafe_allow_html=True)
+    st.markdown('<p class="sub-header">Advanced OMR Evaluation System by <span class="intelicat-brand">InteliCat</span></p>', unsafe_allow_html=True)
     
     # Initialize session state
     if 'omr_processor' not in st.session_state:
-        st.session_state.omr_processor = OptimizedOMRProcessor()
+        st.session_state.omr_processor = RefinedOMRProcessor()
+    
+    if 'processed_results' not in st.session_state:
+        st.session_state.processed_results = None
     
     # Sidebar for configuration
     with st.sidebar:
         st.header("⚙️ Configuration")
         
-        # Answer key input
-        st.subheader("Answer Key")
-        answer_key_format = st.radio(
-            "Answer Key Format",
-            ["100-letter string", "JSON format"],
-            help="Choose how to input the answer key"
+        # Answer Key Input
+        st.subheader("📝 Answer Key")
+        answer_key_type = st.radio(
+            "Select Answer Key Input Type:", 
+            ("JSON Upload", "Manual Entry"),
+            help="Upload a JSON file or manually enter the answer key"
         )
         
-        if answer_key_format == "100-letter string":
-            answer_key_input = st.text_area(
-                "Enter 100-letter answer key (e.g., ABCD...)",
-                value="A" * 100,
-                height=100,
-                help="Enter exactly 100 letters representing answers A, B, C, or D"
+        answer_key_input = None
+        if answer_key_type == "JSON Upload":
+            answer_key_file = st.file_uploader(
+                "Upload Answer Key JSON:", 
+                type=["json"],
+                help="Upload a JSON file with answer key in format: {\"1\": \"A\", \"2\": \"B\", ...}"
             )
+            if answer_key_file is not None:
+                answer_key_input = load_answer_key_from_json(answer_key_file)
         else:
-            answer_key_input = st.text_area(
-                "Enter JSON answer key",
-                value=json.dumps({"1": "A", "2": "B", "3": "C"}, indent=2),
+            # Manual entry
+            st.text_area(
+                "Enter Answer Key (JSON format):",
+                value=create_sample_answer_key(),
                 height=200,
-                help="Enter JSON format: {\"1\": \"A\", \"2\": \"B\", ...}"
+                help="Enter answer key in JSON format: {\"1\": \"A\", \"2\": \"B\", ...}"
             )
+            try:
+                answer_key_input = json.loads(st.session_state.get('answer_key_text', create_sample_answer_key()))
+            except:
+                st.warning("Please enter valid JSON format")
         
-        # Subject ranges
-        st.subheader("Subject Ranges")
-        subject_ranges = st.text_area(
-            "Subject ranges (e.g., 1-20:Python,21-40:EDA,41-60:MySQL,61-80:PowerBI,81-100:AdvStats)",
-            value="1-20:Python,21-40:EDA,41-60:MySQL,61-80:PowerBI,81-100:AdvStats",
-            help="Format: start-end:SubjectName,start-end:SubjectName,..."
+        # Subject Ranges Input
+        st.subheader("📚 Subject Ranges")
+        subject_ranges_input = st.text_area(
+            "Enter Subject Ranges:",
+            value="1-20:Python,21-40:EDA,41-60:SQL,61-80:Power BI,81-100:Statistics",
+            height=100,
+            help="Format: 1-20:Subject1,21-40:Subject2,..."
         )
         
-        # Processing parameters
-        st.subheader("Processing Parameters")
+        # Processing Parameters
+        st.subheader("🔧 Processing Parameters")
         bubble_threshold = st.slider(
-            "Bubble Selection Threshold",
+            "Bubble Detection Threshold:",
             min_value=0.1,
-            max_value=0.8,
+            max_value=0.9,
             value=0.4,
             step=0.05,
-            help="Threshold for detecting filled bubbles (0.4 = 40% of bubble area must be dark)"
+            help="Lower values detect darker bubbles (more sensitive)"
         )
         
-        # Grade thresholds
-        st.subheader("Grade Thresholds")
-        grade_a = st.number_input("Grade A threshold (%)", min_value=0, max_value=100, value=85)
-        grade_b = st.number_input("Grade B threshold (%)", min_value=0, max_value=100, value=70)
-        grade_c = st.number_input("Grade C threshold (%)", min_value=0, max_value=100, value=50)
-    
-    # Main content area
-    col1, col2 = st.columns([1, 1])
-    
-    with col1:
-        st.header("📸 Upload OMR Sheet")
+        # Grade Thresholds
+        st.subheader("📊 Grade Thresholds")
+        col1, col2 = st.columns(2)
+        with col1:
+            grade_a = st.number_input("Grade A (>= %):", min_value=0, max_value=100, value=85)
+            grade_b = st.number_input("Grade B (>= %):", min_value=0, max_value=100, value=70)
+        with col2:
+            grade_c = st.number_input("Grade C (>= %):", min_value=0, max_value=100, value=50)
         
-        # File upload
-        uploaded_file = st.file_uploader(
-            "Choose an OMR sheet image",
-            type=['jpg', 'jpeg', 'png'],
-            help="Upload a photo of the OMR sheet. The app will auto-correct orientation and detect bubbles."
-        )
+        grade_thresholds = {
+            'A': grade_a,
+            'B': grade_b,
+            'C': grade_c,
+            'D': 0
+        }
         
-        # Batch processing option
-        st.subheader("📁 Batch Processing")
-        batch_folder = st.text_input(
-            "Batch folder path (optional)",
-            placeholder="e.g., sample_data/",
-            help="Process all images in a folder"
-        )
-        
-        if st.button("Process Batch Folder", disabled=not batch_folder):
-            if os.path.exists(batch_folder):
-                process_batch_folder(batch_folder, answer_key_input, answer_key_format, subject_ranges, bubble_threshold, grade_a, grade_b, grade_c)
-            else:
-                st.error("Folder does not exist!")
-    
-    with col2:
-        st.header("📊 Results")
-        
-        if uploaded_file is not None:
-            # Process single image
-            process_single_image(uploaded_file, answer_key_input, answer_key_format, subject_ranges, bubble_threshold, grade_a, grade_b, grade_c)
-        else:
-            st.info("Upload an OMR sheet image to see results here.")
-            st.markdown("### Sample Data")
-            if st.button("Load Sample Data"):
-                load_sample_data()
+        # System Info
+        st.subheader("ℹ️ System Info")
+        st.info("""
+        **QuickCheck Features:**
+        - Template-free processing
+        - Automatic orientation correction
+        - Advanced bubble detection
+        - Subject-wise analysis
+        - Batch processing support
+        """)
 
-def process_single_image(uploaded_file, answer_key_input, answer_key_format, subject_ranges, bubble_threshold, grade_a, grade_b, grade_c):
-    """Process a single uploaded image"""
-    try:
-        # Convert uploaded file to OpenCV format
-        image = Image.open(uploaded_file)
-        image_cv = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+    # Main content area
+    st.header("📸 Upload OMR Sheet")
+    
+    # File upload
+    uploaded_file = st.file_uploader(
+        "Choose an OMR sheet image...", 
+        type=["jpg", "jpeg", "png"],
+        help="Upload a clear image of the OMR sheet"
+    )
+    
+    if uploaded_file is not None:
+        # Read and display image
+        file_bytes = np.asarray(bytearray(uploaded_file.read()), dtype=np.uint8)
+        image = cv2.imdecode(file_bytes, cv2.IMREAD_COLOR)
         
-        # Parse answer key
-        answer_key = parse_answer_key(answer_key_input, answer_key_format)
-        if not answer_key:
-            st.error("Invalid answer key format!")
-            return
+        col1, col2 = st.columns([2, 1])
+        with col1:
+            st.image(image, caption="Uploaded OMR Sheet", use_column_width=True)
+        with col2:
+            st.info(f"""
+            **Image Details:**
+            - Size: {image.shape[1]} x {image.shape[0]} pixels
+            - Format: {uploaded_file.type}
+            - File: {uploaded_file.name}
+            """)
         
-        # Parse subject ranges
-        subjects = parse_subject_ranges(subject_ranges)
-        if not subjects:
-            st.error("Invalid subject ranges format!")
-            return
+        # Process button
+        if st.button("🎯 Evaluate OMR Sheet", type="primary"):
+            if not answer_key_input or not subject_ranges_input:
+                st.error("❌ Please provide both Answer Key and Subject Ranges.")
+            else:
+                with st.spinner("🔄 Processing OMR sheet..."):
+                    try:
+                        # Parse subject ranges
+                        subjects = parse_subject_ranges(subject_ranges_input)
+                        
+                        # Process OMR sheet
+                        results, annotated_image = st.session_state.omr_processor.process_omr_sheet(
+                            image, answer_key_input, subjects, bubble_threshold, grade_thresholds
+                        )
+                        
+                        if results and annotated_image is not None:
+                            st.session_state.processed_results = (results, annotated_image)
+                            st.success("✅ OMR Sheet Evaluated Successfully!")
+                        else:
+                            st.error("❌ Failed to evaluate OMR sheet. Please check the image and configuration.")
+                            
+                    except Exception as e:
+                        st.error(f"❌ An error occurred during evaluation: {str(e)}")
+                        st.exception(e)
+    
+    # Display results if available
+    if st.session_state.processed_results:
+        results, annotated_image = st.session_state.processed_results
         
-        # Process the image
-        with st.spinner("Processing OMR sheet..."):
-            result = st.session_state.omr_processor.process_omr(
-                image_cv, 
-                answer_key, 
-                subjects, 
-                bubble_threshold
+        st.header("📊 Evaluation Results")
+        
+        # Key metrics
+        col1, col2, col3, col4 = st.columns(4)
+        with col1:
+            st.markdown('<div class="metric-card">', unsafe_allow_html=True)
+            st.metric("Total Score", f"{results['total_score']}/100")
+            st.markdown('</div>', unsafe_allow_html=True)
+        with col2:
+            st.markdown('<div class="metric-card">', unsafe_allow_html=True)
+            st.metric("Percentage", f"{results['percentage']:.1f}%")
+            st.markdown('</div>', unsafe_allow_html=True)
+        with col3:
+            st.markdown('<div class="metric-card">', unsafe_allow_html=True)
+            st.metric("Grade", results['grade'])
+            st.markdown('</div>', unsafe_allow_html=True)
+        with col4:
+            detected_count = len([k for k, v in results['per_question'].items() if v['detected'] != 'None'])
+            st.markdown('<div class="metric-card">', unsafe_allow_html=True)
+            st.metric("Questions Detected", f"{detected_count}/100")
+            st.markdown('</div>', unsafe_allow_html=True)
+        
+        # Subject-wise scores
+        st.subheader("📚 Subject-wise Scores")
+        subject_data = []
+        for subject, data in results['subjects'].items():
+            percentage = (data['score'] / data['out_of']) * 100 if data['out_of'] > 0 else 0
+            subject_data.append({
+                "Subject": subject,
+                "Score": data['score'],
+                "Out of": data['out_of'],
+                "Percentage": f"{percentage:.1f}%"
+            })
+        
+        subject_df = pd.DataFrame(subject_data)
+        st.dataframe(subject_df, use_container_width=True)
+        
+        # Per-question details
+        st.subheader("📝 Per Question Details")
+        question_data = []
+        for q_num, q_data in results['per_question'].items():
+            question_data.append({
+                "Question": q_num,
+                "Detected": q_data.get("detected", "N/A"),
+                "Correct": "✅" if q_data.get("correct", False) else "❌",
+                "Valid": "✅" if q_data.get("valid", True) else "❌"
+            })
+        
+        question_df = pd.DataFrame(question_data)
+        st.dataframe(question_df, use_container_width=True)
+        
+        # Annotated image
+        st.subheader("🖼️ Annotated OMR Sheet")
+        st.image(annotated_image, caption="Annotated OMR Sheet with Detected Selections", use_column_width=True)
+        
+        # Download options
+        st.subheader("💾 Download Results")
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            # JSON download
+            results_json = json.dumps(results, indent=2, default=str)
+            st.download_button(
+                label="📄 Download JSON Results",
+                data=results_json,
+                file_name="quickcheck_results.json",
+                mime="application/json",
+                help="Download complete results in JSON format"
             )
         
-        if result:
-            display_results(result, grade_a, grade_b, grade_c)
-        else:
-            st.error("Failed to process the OMR sheet. Please check the image quality.")
-            
-    except Exception as e:
-        st.error(f"Error processing image: {str(e)}")
-
-def process_batch_folder(folder_path, answer_key_input, answer_key_format, subject_ranges, bubble_threshold, grade_a, grade_b, grade_c):
-    """Process all images in a folder"""
-    try:
-        # Parse answer key and subjects
-        answer_key = parse_answer_key(answer_key_input, answer_key_format)
-        subjects = parse_subject_ranges(subject_ranges)
-        
-        if not answer_key or not subjects:
-            st.error("Invalid configuration!")
-            return
-        
-        # Get all image files
-        image_extensions = ['.jpg', '.jpeg', '.png']
-        image_files = []
-        for ext in image_extensions:
-            image_files.extend(Path(folder_path).glob(f"*{ext}"))
-            image_files.extend(Path(folder_path).glob(f"*{ext.upper()}"))
-        
-        if not image_files:
-            st.warning("No image files found in the folder!")
-            return
-        
-        st.write(f"Found {len(image_files)} images to process...")
-        
-        # Process each image
-        results = []
-        progress_bar = st.progress(0)
-        
-        for i, image_file in enumerate(image_files):
-            try:
-                # Load image
-                image_cv = cv2.imread(str(image_file))
-                if image_cv is None:
-                    continue
-                
-                # Process
-                result = st.session_state.omr_processor.process_omr(
-                    image_cv, 
-                    answer_key, 
-                    subjects, 
-                    bubble_threshold
-                )
-                
-                if result:
-                    result['filename'] = image_file.name
-                    results.append(result)
-                
-                progress_bar.progress((i + 1) / len(image_files))
-                
-            except Exception as e:
-                st.warning(f"Error processing {image_file.name}: {str(e)}")
-        
-        # Display batch results
-        if results:
-            display_batch_results(results, grade_a, grade_b, grade_c)
-        else:
-            st.error("No images were successfully processed!")
-            
-    except Exception as e:
-        st.error(f"Error processing batch: {str(e)}")
-
-def parse_answer_key(answer_key_input, format_type):
-    """Parse answer key from different formats"""
-    try:
-        if format_type == "100-letter string":
-            # Validate length and characters
-            if len(answer_key_input) != 100:
-                return None
-            if not all(c in 'ABCD' for c in answer_key_input.upper()):
-                return None
-            return {str(i+1): answer_key_input[i].upper() for i in range(100)}
-        else:
-            # JSON format
-            data = json.loads(answer_key_input)
-            return {str(k): str(v).upper() for k, v in data.items()}
-    except:
-        return None
-
-def parse_subject_ranges(subject_ranges):
-    """Parse subject ranges string"""
-    try:
-        subjects = {}
-        ranges = subject_ranges.split(',')
-        for range_str in ranges:
-            range_str = range_str.strip()
-            if ':' in range_str:
-                range_part, subject = range_str.split(':', 1)
-                if '-' in range_part:
-                    start, end = map(int, range_part.split('-'))
-                    for i in range(start, end + 1):
-                        subjects[str(i)] = subject.strip()
-        return subjects
-    except:
-        return None
-
-def display_results(result, grade_a, grade_b, grade_c):
-    """Display processing results"""
-    # Overall score
-    total_score = result['total_score']
-    percentage = result['percentage']
-    grade = calculate_grade(percentage, grade_a, grade_b, grade_c)
+        with col2:
+            # CSV download
+            results_csv = pd.DataFrame([results]).to_csv(index=False)
+            st.download_button(
+                label="📊 Download CSV Results",
+                data=results_csv,
+                file_name="quickcheck_results.csv",
+                mime="text/csv",
+                help="Download results in CSV format for spreadsheet analysis"
+            )
     
-    # Score display
-    grade_class = f"grade-{grade}"
-    st.markdown(f'<div class="score-display {grade_class}">Score: {total_score}/100 ({percentage:.1f}%) - Grade {grade}</div>', unsafe_allow_html=True)
-    
-    # Subject-wise scores
-    st.subheader("📚 Subject-wise Scores")
-    subject_data = []
-    for subject, data in result['subjects'].items():
-        subject_data.append({
-            'Subject': subject,
-            'Score': f"{data['score']}/{data['out_of']}",
-            'Percentage': f"{(data['score']/data['out_of']*100):.1f}%"
-        })
-    
-    df_subjects = pd.DataFrame(subject_data)
-    st.dataframe(df_subjects, use_container_width=True)
-    
-    # Per-question results
-    st.subheader("📋 Per-Question Results")
-    question_data = []
-    for q_num, data in result['per_question'].items():
-        status = "✅" if data['correct'] else "❌" if data['valid'] else "⚠️"
-        question_data.append({
-            'Question': q_num,
-            'Detected': data['detected'],
-            'Correct': data['correct'],
-            'Valid': data['valid'],
-            'Status': status
-        })
-    
-    df_questions = pd.DataFrame(question_data)
-    st.dataframe(df_questions, use_container_width=True)
-    
-    # Annotated image
-    if 'annotated_image' in result:
-        st.subheader("🖼️ Annotated Image")
-        st.image(result['annotated_image'], caption="Detected bubbles and markings", use_column_width=True)
-    
-    # Export options
-    st.subheader("💾 Export Results")
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        # JSON export
-        json_data = json.dumps(result, indent=2)
-        st.download_button(
-            label="Download JSON",
-            data=json_data,
-            file_name="omr_results.json",
-            mime="application/json"
-        )
-    
-    with col2:
-        # CSV export
-        csv_data = df_questions.to_csv(index=False)
-        st.download_button(
-            label="Download CSV",
-            data=csv_data,
-            file_name="omr_results.csv",
-            mime="text/csv"
-        )
-
-def display_batch_results(results, grade_a, grade_b, grade_c):
-    """Display batch processing results"""
-    st.subheader("📊 Batch Processing Results")
-    
-    # Summary table
-    summary_data = []
-    for result in results:
-        grade = calculate_grade(result['percentage'], grade_a, grade_b, grade_c)
-        summary_data.append({
-            'Filename': result['filename'],
-            'Score': f"{result['total_score']}/100",
-            'Percentage': f"{result['percentage']:.1f}%",
-            'Grade': grade
-        })
-    
-    df_summary = pd.DataFrame(summary_data)
-    st.dataframe(df_summary, use_container_width=True)
-    
-    # Export batch results
-    st.subheader("💾 Export Batch Results")
-    batch_json = json.dumps(results, indent=2)
-    st.download_button(
-        label="Download Batch JSON",
-        data=batch_json,
-        file_name="batch_omr_results.json",
-        mime="application/json"
+    # Footer
+    st.markdown("---")
+    st.markdown(
+        """
+        <div style='text-align: center; color: #666; padding: 20px;'>
+            <p><strong>QuickCheck</strong> - Advanced OMR Evaluation System</p>
+            <p>Developed by <span style='color: #FF6B35; font-weight: bold;'>InteliCat Team</span></p>
+            <p>Making OMR evaluation simple, accurate, and efficient</p>
+        </div>
+        """, 
+        unsafe_allow_html=True
     )
-
-def calculate_grade(percentage, grade_a, grade_b, grade_c):
-    """Calculate grade based on percentage"""
-    if percentage >= grade_a:
-        return "A"
-    elif percentage >= grade_b:
-        return "B"
-    elif percentage >= grade_c:
-        return "C"
-    else:
-        return "D"
-
-def load_sample_data():
-    """Load sample data for demonstration"""
-    st.info("Sample data loading functionality would be implemented here.")
-    st.write("This would load sample images and answer keys for testing.")
 
 if __name__ == "__main__":
     main()
