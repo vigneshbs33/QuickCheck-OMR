@@ -6,6 +6,7 @@ A comprehensive, template-free OMR (Optical Mark Recognition) evaluation system 
 
 ## 🎯 Features
 
+
 - **Template-free Processing**: No predefined templates required
 - **Automatic Orientation Correction**: Handles rotated/skewed sheets
 - **Advanced Bubble Detection**: Multiple algorithms for maximum accuracy
